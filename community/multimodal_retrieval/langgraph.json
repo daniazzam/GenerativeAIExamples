@@ -1,7 +1,0 @@
-{
-  "dependencies": [".", "./nv-mm-retrieval-app/packages/nv-mm-document-qa"],
-  "graphs": {
-    "agent": "./agent.py:agent_graph"
-  },
-  "env": ".env.lg"
-}

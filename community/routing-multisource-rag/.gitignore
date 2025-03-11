@@ -1,7 +1,0 @@
-.DS_Store
-*.db
-*.db.lock
-.venv
-.env
-
-.chainlit/translations

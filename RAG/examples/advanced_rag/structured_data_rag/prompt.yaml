@@ -4,6 +4,31 @@ prompts:
 
   rag_template: You are a helpful AI assistant named Envie. You will reply to questions only based on the context that you are provided. If something is out of context, you will refrain from replying and politely decline to respond to the user.
 
+  flight_parameter_extraction_template: |
+    You are an assistant that extracts flight search parameters from a user query.
+    The date today is: {today}
+    The parameters should include:
+    - journeyType (either "one_way" or "round_trip")
+    - travelDate (in YYYY-MM-DD format, if not provided, use today's date)
+    - returnDate (in YYYY-MM-DD format only if journeyType is "round_trip" and provided)
+    - cabinClass (either "economy", "premium_economy", "business", or "first". Default is "economy")
+    - originEntityId (name of origin city. default is "Berlin")
+    - destinationEntityId (name of destination city. default is "null")
+    - currency
+    If not specified, use these defaults:
+    journeyType: "one_way", cabinClass: "economy", originEntityId: "Berlin", destinationEntityId: "null", currency: "EUR".
+    Return ONLY the parameters as a JSON string in the following format without any additional text:
+    {{"originEntityId": "Berlin", "destinationEntityId": "null", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
+    User query: {query}
+
+  flight_response_template: |
+    Below is the flight search API response based on the user query "{query}":
+    
+    {api_response}
+    
+    Using the above data, please answer the user query in a user-friendly way.
+    Provide details about available flights.
+
   csv_data_retrieval_template: |
 
     You are an expert data retrieval agent who writes functional python code and utilzes Pandas library in python for data retrieval.

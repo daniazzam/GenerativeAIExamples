@@ -40,7 +40,7 @@ RUN python3.10 -c "from sentence_transformers import SentenceTransformer; model 
 
 # Install any example specific dependency if available
 ARG EXAMPLE_PATH
-COPY RAG/examples/${EXAMPLE_PATH} /opt/RAG/examples/${EXAMPLE_PATH}
+COPY RAG/examples/${EXAMPLE_PATH}/requirements.txt /opt/RAG/examples/${EXAMPLE_PATH}/requirements.txt
 RUN if [ -f "/opt/RAG/examples/${EXAMPLE_PATH}/requirements.txt" ] ; then \
     pip3 install --no-cache-dir -r /opt/RAG/examples/${EXAMPLE_PATH}/requirements.txt ; else \
     echo "Skipping example dependency installation, since requirements.txt was not found" ; \
@@ -55,6 +55,9 @@ RUN if [ "${EXAMPLE_PATH}" = "advanced_rag/multimodal_rag" ] ; then \
 COPY RAG/src/chain_server /opt/RAG/src/chain_server
 COPY RAG/src/pandasai /opt/RAG/src/pandasai
 COPY RAG/tools /opt/RAG/tools
+
+# Copy the example code
+COPY RAG/examples/${EXAMPLE_PATH} /opt/RAG/examples/${EXAMPLE_PATH}
 
 WORKDIR /opt
 ENTRYPOINT ["uvicorn", "RAG.src.chain_server.server:app"]

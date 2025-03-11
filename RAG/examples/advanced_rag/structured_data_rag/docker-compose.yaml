@@ -1,6 +1,6 @@
 include:
   - path:
-    - ../../local_deploy/docker-compose-nim-ms.yaml
+      - ../../local_deploy/docker-compose-nim-ms.yaml
 
 services:
   chain-server:
@@ -10,12 +10,12 @@ services:
       context: ../../../../
       dockerfile: RAG/src/chain_server/Dockerfile
       args:
-        EXAMPLE_PATH: 'advanced_rag/structured_data_rag'
+        EXAMPLE_PATH: "advanced_rag/structured_data_rag"
     volumes:
       - ./prompt.yaml:/prompt.yaml
     command: --port 8081 --host 0.0.0.0
     environment:
-      EXAMPLE_PATH: 'advanced_rag/structured_data_rag'
+      EXAMPLE_PATH: "advanced_rag/structured_data_rag"
       APP_LLM_MODELNAME: ${APP_LLM_MODELNAME:-meta/llama3-70b-instruct}
       APP_LLM_MODELENGINE: nvidia-ai-endpoints
       APP_LLM_SERVERURL: ${APP_LLM_SERVERURL:-""}
@@ -26,10 +26,11 @@ services:
       COLLECTION_NAME: ${COLLECTION_NAME:-structured_data_rag}
       CSV_NAME: PdM_machines
       LOGLEVEL: ${LOGLEVEL:-INFO}
+      FLIGHT_API_KEY: ${FLIGHT_API_KEY}
     ports:
-    - "8081:8081"
+      - "8081:8081"
     expose:
-    - "8081"
+      - "8081"
     shm_size: 5gb
     depends_on:
       nemollm-inference:
@@ -50,11 +51,11 @@ services:
       APP_SERVERPORT: 8081
       APP_MODELNAME: ${APP_LLM_MODELNAME:-meta/llama3-70b-instruct}
     ports:
-    - "8090:8090"
+      - "8090:8090"
     expose:
-    - "8090"
+      - "8090"
     depends_on:
-    - chain-server
+      - chain-server
 
 networks:
   default:

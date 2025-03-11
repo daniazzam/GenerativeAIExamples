@@ -325,6 +325,10 @@ async def generate_answer(request: Request, prompt: Prompt) -> StreamingResponse
     """Generate and stream the response to the provided prompt."""
 
     chat_history = prompt.messages
+
+    logger.info(f"Dani: Received prompt: {prompt}")    
+    # logger.info(f"Dani: Received chat_history: {chat_history}")
+
     # The last user message will be the query for the rag or llm chain
     last_user_message = next((message.content for message in reversed(chat_history) if message.role == 'user'), None)
 
