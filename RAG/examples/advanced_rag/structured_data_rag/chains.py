@@ -154,7 +154,7 @@ class APIChatbot(BaseExample):
         logger.info("Extracted and filtered API data: %s", filtered_api_response_str)
 
         # --- Step 5: Generate Final Answer Using the Filtered API Response ---
-        response_template_str = prompts_config.get("flight_response_template")
+        response_template_str = prompts_config.get("flight_response_template_new")
         answer_prompt_template = PromptTemplate(
             template=response_template_str,
             input_variables=["api_response", "query"],

@@ -29,6 +29,13 @@ prompts:
     Using the above data, please answer the user query in a user-friendly way.
     Provide details about available flights.
 
+  flight_response_template_new: |
+    You are a helpful travel assistant. The following is the flight search information based on the user's request: "{query}".
+    
+    {api_response}
+    
+    Please summarize this information in a friendly, conversational tone as if you were speaking directly to the user. Include key flight details like available options, pricing, and whether direct flights are available. If no flights are found, politely let the user know and suggest trying a different search. Keep your response concise and natural, suitable for being spoken aloud by an avatar.
+
   csv_data_retrieval_template: |
 
     You are an expert data retrieval agent who writes functional python code and utilzes Pandas library in python for data retrieval.

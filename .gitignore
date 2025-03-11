@@ -34,3 +34,4 @@ RAG/notebooks/langchain/data/save_embedding
 .idea
 
 RAG/examples/advanced_rag/structured_data_rag/.env
+deploy/k8s-operator/kube-trailblazer/pkg/helmer/controller/test.yaml
