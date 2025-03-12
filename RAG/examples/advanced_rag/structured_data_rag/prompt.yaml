@@ -8,6 +8,7 @@ prompts:
     You are an assistant that extracts flight search parameters from a user query.
     The date today is: {today}
     The parameters should include:
+    - useAPI (boolean, if the user query requires API call, set it to true, otherwise if the query is just for general information, set it to false)
     - journeyType (either "one_way" or "round_trip")
     - travelDate (in YYYY-MM-DD format, if not provided, use today's date)
     - returnDate (in YYYY-MM-DD format only if journeyType is "round_trip" and provided)
@@ -18,8 +19,9 @@ prompts:
     If not specified, use these defaults:
     journeyType: "one_way", cabinClass: "economy", originEntityId: "Berlin", destinationEntityId: "null", currency: "EUR".
     Return ONLY the parameters as a JSON string in the following format without any additional text:
-    {{"originEntityId": "Berlin", "destinationEntityId": "null", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
+    {{"useAPI": true, "originEntityId": "Berlin", "destinationEntityId": "null", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
     User query: {query}
+    Again, if the user query does is not related to the fields that need be extracted, such as a general request for information, set useAPI field to false.
 
   flight_response_template: |
     Below is the flight search API response based on the user query "{query}":

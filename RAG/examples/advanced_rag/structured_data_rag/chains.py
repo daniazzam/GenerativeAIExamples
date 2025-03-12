@@ -69,7 +69,7 @@ class APIChatbot(BaseExample):
         logger.info("Document %s ingested successfully", filename)
 
 
-    def llm_chain(self, query: str, chat_history: List["Message"], **kwargs) -> Generator[str, None, None]:
+    def llm_chain(self, query: str, chat_history: List["Message"], addPhrase: bool = False, **kwargs) -> Generator[str, None, None]:
         """Execute a simple LLM chain using the components defined above."""
 
         logger.info("Using llm to generate response directly without knowledge base.")
@@ -88,7 +88,9 @@ class APIChatbot(BaseExample):
 
         logger.info(f"Using prompt for response generation: {prompt.format(input=query)}")
         chain = prompt | get_llm(**kwargs) | StrOutputParser()
-        return chain.stream({"input": query})
+        if addPhrase:
+            yield "The following response is based solely on my general knowledge, as no flight API search was needed."
+        yield from chain.stream({"input": query})
 
     def rag_chain(self, query: str, chat_history: List["Message"], **kwargs) -> Generator[str, None, None]:
         """
@@ -118,6 +120,12 @@ class APIChatbot(BaseExample):
         try:
             api_params = json.loads(param_results)
             logger.info("Loaded API parameters: %s", api_params)
+            
+            # If API search is not needed, call llm_chain with an introductory note.
+            if not api_params.get("useAPI"):
+                logger.info("The user query does not require a flight API search. Using general knowledge.")
+                return self.llm_chain(query, chat_history, addPhrase=True, **kwargs)
+        
         except Exception as e:
             logger.error("Failed to parse API parameters: %s", e)
             return iter(["Failed to parse API parameters."])
