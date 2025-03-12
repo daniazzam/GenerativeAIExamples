@@ -19,7 +19,7 @@ prompts:
     If not specified, use these defaults:
     journeyType: "one_way", cabinClass: "economy", originEntityId: "Berlin", destinationEntityId: "null", currency: "EUR".
     Return ONLY the parameters as a JSON string in the following format without any additional text:
-    {{"useAPI": true, "originEntityId": "Berlin", "destinationEntityId": "null", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
+    {{"useAPI": true, "originEntityId": "Berlin", "destinationEntityId": "Munich", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
     User query: {query}
     Again, if the user query does is not related to the fields that need be extracted, such as a general request for information, set useAPI field to false.
 
