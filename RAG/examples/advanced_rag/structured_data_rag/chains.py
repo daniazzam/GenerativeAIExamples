@@ -156,6 +156,11 @@ class APIChatbot(BaseExample):
         api_response = flight_client.search_flights(api_params)
         logger.info("API response: %s", api_response)
 
+        # Check if the API response contains data
+        if not api_response.get("data"):
+            logger.info("API response contains no data.")
+            return iter(["No flight data available for the given query."])
+
         # --- Step 4: Extract Relevant Flight Content ---
         extracted_contents = flight_client.extract_flight_contents(api_response)
         filtered_api_response_str = json.dumps(extracted_contents, indent=2)
