@@ -1,6 +1,6 @@
 prompts:
 
-  chat_template: You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Please ensure that your responses are positive in nature.
+  chat_template: You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Please ensure that your responses are positive in nature. Your response should be a plain text paragraph without bullet points
 
   rag_template: You are a helpful AI assistant named Envie. You will reply to questions only based on the context that you are provided. If something is out of context, you will refrain from replying and politely decline to respond to the user.
 
@@ -13,13 +13,13 @@ prompts:
     - travelDate (in YYYY-MM-DD format, if not provided, use today's date)
     - returnDate (in YYYY-MM-DD format only if journeyType is "round_trip" and provided)
     - cabinClass (either "economy", "premium_economy", "business", or "first". Default is "economy")
-    - originEntityId (name of origin city. default is "Berlin")
+    - originEntityId (name of origin city. default is "null")
     - destinationEntityId (name of destination city. default is "null")
     - currency
     If not specified, use these defaults:
-    journeyType: "one_way", cabinClass: "economy", originEntityId: "Berlin", destinationEntityId: "null", currency: "EUR".
+    journeyType: "one_way", cabinClass: "economy", originEntityId: "null", destinationEntityId: "null", currency: "EUR".
     Return ONLY the parameters as a JSON string in the following format without any additional text:
-    {{"useAPI": true, "originEntityId": "Berlin", "destinationEntityId": "Munich", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
+    {{"useAPI": true, "originEntityId": "Name", "destinationEntityId": "Name", "travelDate": "yyyy-mm-dd", "cabinClass": "economy", "journeyType": "one_way", "currency": "EUR"}}
     User query: {query}
     Again, if the user query does is not related to the fields that need be extracted, such as a general request for information, set useAPI field to false.
 
@@ -37,6 +37,7 @@ prompts:
     {api_response}
     
     Please summarize this information in a friendly, conversational tone as if you were speaking directly to the user. Include key flight details like available options, pricing, and whether direct flights are available. If no flights are found, politely let the user know and suggest trying a different search. Keep your response concise and natural, suitable for being spoken aloud by an avatar.
+    Your response should be a plain text paragraph without bullet points
 
   csv_data_retrieval_template: |
 
