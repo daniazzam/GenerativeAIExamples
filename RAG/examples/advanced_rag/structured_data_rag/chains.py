@@ -164,7 +164,6 @@ class APIChatbot(BaseExample):
         # --- Step 4: Extract Relevant Flight Content ---
         extracted_contents = flight_client.extract_flight_contents(api_response)
         filtered_api_response_str = json.dumps(extracted_contents, indent=2)
-        logger.info("Extracted and filtered API data: %s", filtered_api_response_str)
 
         # --- Step 5: Generate Final Answer Using the Filtered API Response ---
         response_template_str = prompts_config.get("flight_response_template_new")
